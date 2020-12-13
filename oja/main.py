@@ -183,13 +183,13 @@ if __name__ == '__main__':
         upload_to_gcs(
             config_default['BUCKET_NAME'],
             json.dumps(result),
-            f'{config_default['FOLDER_PATH']}general-{year}.json',
+            f'{config_default["FOLDER_PATH"]}general-{year}.json',
         )
 
     logging.debug('ALL PAGES CRAWLED')
 
     response = notify_slack(
-        f'All OJA data are completed, stored in <{config_default['GCS_LINK_URL']}|GCS>.'
+        f'All OJA data are completed, stored in <{config_default["GCS_LINK_URL"]}|GCS>.'
     )
 
     logging.debug(f'Slack notified - {response.text}')
