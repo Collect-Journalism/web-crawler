@@ -27,7 +27,7 @@ config.read('config.ini')
 config_default = config['DEFAULT']
 
 
-def crawl_ojas(year: int) -> list:
+def crawl_oja(year: int) -> list:
     suop_with_lxml_parser = partial(BeautifulSoup, features='lxml')
     get_suop_under_a_tags = partial(
         suop_with_lxml_parser,
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     # YEARS = (2020, 2019)
 
     for year in YEARS:
-        result = crawl_ojas(year)
+        result = crawl_oja(year)
 
         logging.debug(f'PAGES IN {year} CRAWLED')
 
@@ -189,7 +189,7 @@ if __name__ == '__main__':
     logging.debug('ALL PAGES CRAWLED')
 
     response = notify_slack(
-        f'All OJAs data are completed, stored in <{config_default['GCS_LINK_URL']}|GCS>.'
+        f'All OJA data are completed, stored in <{config_default['GCS_LINK_URL']}|GCS>.'
     )
 
     logging.debug(f'Slack notified - {response.text}')
