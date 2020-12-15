@@ -68,7 +68,7 @@ def crawl_oja(year: int) -> list:
 
     def parse(soup: BeautifulSoup) -> dict:
         try:
-            # Get title & subtitle from '.pagetitle'
+            # Get title, subtitle & status from '.pagetitle'
             page_title = soup.find(class_='pagetitle')
             title = pipe(
                 page_title.find('h1'),
@@ -76,6 +76,10 @@ def crawl_oja(year: int) -> list:
             )
             subtitle = pipe(
                 page_title.find('h2'),
+                get_text,
+            )
+            status = pipe(
+                page_title.find(class_='status'),
                 get_text,
             )
 
@@ -108,6 +112,7 @@ def crawl_oja(year: int) -> list:
                 'subtitle': subtitle,
                 'orgs': orgs,
                 'award': award,
+                'status': status,
                 'year': year,
                 'entry_links': entry_links,
                 'entry_link_main': entry_link_main,
